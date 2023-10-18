@@ -28,7 +28,7 @@ import axios from 'axios';
 import { usePlaidLink } from 'react-plaid-link';
 
 // Project 1 (working baseURL)
-//axios.defaults.baseURL = 'http://localhost:5001';
+// axios.defaults.baseURL = 'http://localhost:5001';
 
 // Project 1 (additional component)
 // function PlaidAuth({ publicToken }) {
@@ -70,7 +70,7 @@ function Navbar({ user, isSidebarOpen, setIsSidebarOpen }) {
   //   fetch();
   // }, []);
 
-  // Project 1 (usePlaidLink)
+  //  Project 1 (usePlaidLink)
   // const { open, ready } = usePlaidLink({
   //   token: linkToken,
   //   onSuccess: (public_token, metadata) => {
