@@ -24,7 +24,7 @@ export const getUserPerformance = async (req, res) => {
           as: 'affiliateStats',
         },
       },
-      { $unwind: '$affiliatestats' },
+      { $unwind: '$affiliateStats' },
     ]);
 
     const saleTransactions = await Promise.all(
