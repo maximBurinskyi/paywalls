@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { useTheme } from '@emotion/react';
+import { useTheme } from '@mui/material';
 import { useGetSalesQuery } from 'state/api';
 
 const OverviewChart = ({ isDashboard = false, view }) => {
@@ -11,13 +11,11 @@ const OverviewChart = ({ isDashboard = false, view }) => {
     if (!data) return [];
 
     const { monthlyData } = data;
-
     const totalSalesLine = {
       id: 'totalSales',
       color: theme.palette.secondary.main,
       data: [],
     };
-
     const totalUnitsLine = {
       id: 'totalUnits',
       color: theme.palette.secondary[600],
@@ -37,12 +35,14 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           ...totalUnitsLine.data,
           { x: month, y: curUnits },
         ];
+
         return { sales: curSales, units: curUnits };
       },
       { sales: 0, units: 0 }
     );
+
     return [[totalSalesLine], [totalUnitsLine]];
-  }, [data]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!data || isLoading) return 'Loading...';
 
@@ -61,7 +61,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
               fill: theme.palette.secondary[200],
             },
           },
-          tick: {
+          ticks: {
             line: {
               stroke: theme.palette.secondary[200],
               strokeWidth: 1,
@@ -73,7 +73,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         },
         legends: {
           text: {
-            fille: theme.palette.secondary[200],
+            fill: theme.palette.secondary[200],
           },
         },
         tooltip: {
@@ -88,11 +88,12 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         type: 'linear',
         min: 'auto',
         max: 'auto',
-        stacked: true,
+        stacked: false,
         reverse: false,
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
+      enableArea={isDashboard}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -100,6 +101,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           if (isDashboard) return v.slice(0, 3);
           return v;
         },
+        orient: 'bottom',
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -108,6 +110,8 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         legendPosition: 'middle',
       }}
       axisLeft={{
+        orient: 'left',
+        tickValues: 5,
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -117,13 +121,13 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         legendOffset: -60,
         legendPosition: 'middle',
       }}
+      // enableGridX={false}
       enableGridY={false}
-      pointSize={7}
+      pointSize={10}
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}
       pointBorderColor={{ from: 'serieColor' }}
       pointLabelYOffset={-12}
-      enableArea={true}
       useMesh={true}
       legends={
         !isDashboard
