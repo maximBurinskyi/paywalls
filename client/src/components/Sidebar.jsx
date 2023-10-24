@@ -299,13 +299,13 @@ const Sidebar = ({
 
           <Box position="absolute" bottom="2rem">
             <Divider />
-            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
+            {/* <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
               <Box
                 component="img"
                 alt="profile"
                 src={profileImage}
-                height="40px"
-                width="40px"
+                height="30px"
+                width="30px"
                 borderRadius="50%"
                 sx={{ objectFit: 'cover' }}
               />
@@ -330,7 +330,7 @@ const Sidebar = ({
                   fontSize: '25px ',
                 }}
               />
-            </FlexBetween>
+            </FlexBetween> */}
           </Box>
         </Drawer>
       )}
